@@ -37,7 +37,7 @@ const reducer = (state, action) => {
    }
 };
 
-function Chair({ chairInfo }) {
+function Chair({ chairInfo, setCount, setSum }) {
    const [chair, dispatch] = useReducer(reducer, initState);
 
    useEffect(() => {
@@ -48,14 +48,18 @@ function Chair({ chairInfo }) {
       <>
          <div
             className={`chair ${chair.state}`}
-            onClick={() =>{
-                  if(chair.clickCount < 3){
-                     dispatch({ clickCount: chair.clickCount, data: chairInfo })
-                  } else {
-                     alert("این صندلی قبلا رزرو شده است!")
-                  }
+            onClick={() => {
+               if (chair.clickCount < 3) {
+                  dispatch({ clickCount: chair.clickCount, data: chairInfo });
+               } else {
+                  alert("این صندلی قبلا رزرو شده است!");
                }
-            }
+
+               if (chair.clickCount === 2) {
+                  setCount((prevCount) => prevCount + 1);
+                  setSum((prevSum) => prevSum + chair.price);
+               }
+            }}
          >
             {chair.number}
          </div>
