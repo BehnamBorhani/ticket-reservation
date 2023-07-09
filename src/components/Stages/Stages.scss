@@ -1,0 +1,43 @@
+.container {
+   width: 80%;
+   margin: 0 auto;
+   display: grid;
+   grid-template-areas:
+      "B A A C"
+      "B A A C"
+      "D D D D";
+   gap: 0.5rem;
+
+   section {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+   }
+
+   .section-A {
+      grid-area: A;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 0.5rem;
+   }
+
+   .section-B {
+      grid-area: B;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+   }
+
+   .section-C {
+      grid-area: C;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.5rem;
+   }
+
+   .section-D {
+      grid-area: D;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 0.5rem;
+   }
+}
