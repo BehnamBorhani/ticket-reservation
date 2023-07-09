@@ -2,29 +2,65 @@ import React, { useEffect, useReducer } from "react";
 import "./Chair.scss";
 
 const initState = {
-   chair: {},
+   number: 0,
+   section: "",
+   price: 0,
+   state: "",
    clickCount: 0,
 };
 
 const reducer = (state, action) => {
-   switch (action.type) {
-      case "success":
-         return { ...state, chair: action.data };
-      case "failed":
-         return { ...state, errorMessage: action.error };
+   switch (action.clickCount) {
+      case -1:
+         return { ...state, ...action.data };
+
+      case 0:
+         return {
+            ...state,
+            clickCount: action.clickCount + 1,
+            state: "selected",
+         };
+      case 1:
+         return {
+            ...state,
+            clickCount: action.clickCount + 1,
+            state: "reserving",
+         };
+      case 2:
+         return {
+            ...state,
+            clickCount: action.clickCount + 1,
+            state: "reserved",
+         };
       default:
          return state;
    }
 };
 
 function Chair({ chairInfo }) {
-   const [chairs, dispatch] = useReducer(reducer, initState);
+   const [chair, dispatch] = useReducer(reducer, initState);
 
    useEffect(() => {
-      dispatch({ type: "success", data: chairInfo });
+      dispatch({ clickCount: -1, data: chairInfo });
    }, []);
 
-   return <div className={`chair`}>{chairs.chair.number}</div>;
+   return (
+      <>
+         <div
+            className={`chair ${chair.state}`}
+            onClick={() =>{
+                  if(chair.clickCount < 3){
+                     dispatch({ clickCount: chair.clickCount, data: chairInfo })
+                  } else {
+                     alert("این صندلی قبلا رزرو شده است!")
+                  }
+               }
+            }
+         >
+            {chair.number}
+         </div>
+      </>
+   );
 }
 
 export default Chair;
