@@ -3,7 +3,6 @@ import "./Chair.scss";
 
 const initState = {
    number: 0,
-   section: "",
    price: 0,
    state: "",
    clickCount: 0,
