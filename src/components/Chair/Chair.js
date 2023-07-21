@@ -59,6 +59,7 @@ function Chair({ chairInfo, setCount, setSum }) {
                   setSum((prevSum) => prevSum + chair.price);
                }
             }}
+            title={chair.price}
          >
             {chair.number}
          </div>
